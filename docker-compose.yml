@@ -6,11 +6,11 @@ services:
    container_name: dbt_postgres 
    restart: always 
    environment: 
-     POSTGRES_USER: dbt_user 
-     POSTGRES_PASSWORD: dbt_password 
-     POSTGRES_DB: dbt_warehouse
+     POSTGRES_USER: baraah 
+     POSTGRES_PASSWORD: password@123
+     POSTGRES_DB: e_comm
    ports: 
-     - "5432:5432" 
+     - "5433:5432" 
    volumes: 
      - postgres_data:/var/lib/postgresql/data 
    networks: 
