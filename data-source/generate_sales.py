@@ -37,6 +37,14 @@ def generate_data():
         })
 
 
+    df = pd.DataFrame(data)
+
+    inject_errors(df)
+
+    df.to_csv("ecommerce_sales.csv", index=False)
+    
+    print("CSV file generated successfully.")
+
 
 def inject_errors(df):
     num_errors = int(len(df) * ERROR_PERCENTAGE)
@@ -69,3 +77,6 @@ def inject_errors(df):
 
         elif error_type == "duplicate_transaction":
             df.at[row, "transaction_id"] = "T1"
+
+if __name__ == "__main__":
+    generate_data()
