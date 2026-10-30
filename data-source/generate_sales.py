@@ -35,3 +35,37 @@ def generate_data():
             "payment_method": random.choice(payment_methods),
             "order_status": random.choice(["Completed", "Cancelled", "Returned"])
         })
+
+
+
+def inject_errors(df):
+    num_errors = int(len(df) * ERROR_PERCENTAGE)
+
+    for _ in range(num_errors):
+        row = random.randint(0, len(df) - 1)
+        error_type = random.choice([
+            "null_customer",
+            "negative_quantity",
+            "invalid_price",
+            "future_date",
+            "invalid_country",
+            "duplicate_transaction"
+        ])
+
+        if error_type == "null_customer":
+            df.at[row, "customer_id"] = None
+
+        elif error_type == "negative_quantity":
+            df.at[row, "quantity"] = -random.randint(1, 5)
+
+        elif error_type == "invalid_price":
+            df.at[row, "price"] = -random.uniform(1, 100)
+
+        elif error_type == "future_date":
+            df.at[row, "order_date"] = datetime.now() + timedelta(days=30)
+
+        elif error_type == "invalid_country":
+            df.at[row, "country"] = "XYZ"
+
+        elif error_type == "duplicate_transaction":
+            df.at[row, "transaction_id"] = "T1"
