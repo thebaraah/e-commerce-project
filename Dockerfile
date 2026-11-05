@@ -15,4 +15,10 @@ RUN pip install --no-cache-dir \
     dbt-core==1.11.6 \
     dbt-postgres==1.10.0
 
+# Install data generation dependencies
+RUN pip install --no-cache-dir \
+    pandas \
+    numpy \
+    Faker
+
 ENTRYPOINT ["dbt"]
