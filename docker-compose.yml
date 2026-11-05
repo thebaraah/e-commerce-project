@@ -26,6 +26,15 @@ services:
      - postgres 
    networks: 
      - dbt_network 
+
+ data_generator:
+    build: .
+    container_name: ecommerce_data_generator
+    working_dir: /usr/app
+    entrypoint: ["python"]
+    command: ["data-source/generate_sales.py"]
+    volumes:
+      - .:/usr/app
  
 volumes: 
  postgres_data: 
